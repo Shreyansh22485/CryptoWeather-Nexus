@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 
 const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3';
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   const { searchParams } = new URL(request.url);
   const days = searchParams.get('days') || '7';
   const interval = searchParams.get('interval') || 'daily';
