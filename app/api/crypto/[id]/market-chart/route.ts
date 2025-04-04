@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3';
 
@@ -55,15 +55,12 @@ async function fetchWithRetry(url: string, options: AxiosRequestConfig, maxRetri
   throw lastError;
 }
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  // Properly await the entire params object
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+type Params = { params: { id: string } };
+
+export async function GET(request: NextRequest, { params }: Params) {
+  const id = params.id;
   
-  const { searchParams } = new URL(request.url);
+  const searchParams = request.nextUrl.searchParams;
   const days = searchParams.get('days') || '7';
   const interval = searchParams.get('interval') || 'daily';
 
