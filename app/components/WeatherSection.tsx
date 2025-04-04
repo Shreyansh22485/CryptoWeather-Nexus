@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHooks';
 import { fetchWeatherData, toggleCityFavorite } from '../redux/weatherSlice';
 
@@ -53,10 +54,12 @@ export default function WeatherSection() {
                   <h3 className="font-semibold text-lg text-gray-800">{weather.city}</h3>
                   <div className="flex items-center mt-1">
                     <div className="text-3xl font-bold text-gray-900">{Math.round(weather.temperature)}°C</div>
-                    <img 
-                      src={`https://openweathermap.org/img/wn/${weather.icon}.png`} 
+                    <Image 
+                      src={`https://openweathermap.org/img/wn/${weather.icon}.png`}
                       alt={weather.conditions}
-                      className="w-12 h-12 ml-2"
+                      width={48}
+                      height={48}
+                      className="ml-2"
                     />
                   </div>
                   <p className="text-gray-600">{weather.conditions}</p>

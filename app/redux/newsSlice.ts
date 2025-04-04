@@ -20,7 +20,10 @@ export const fetchNews = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       return await fetchCryptoNews();
-    } catch (_error) {
+    } catch (err) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.message);
+      }
       return rejectWithValue('Failed to fetch crypto news');
     }
   }

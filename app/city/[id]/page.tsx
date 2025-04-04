@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks';
 import { fetchWeatherData, fetchCityWeatherHistory } from '../../redux/weatherSlice';
 import Header from '../../components/Header';
@@ -140,10 +141,11 @@ export default function CityDetailPage() {
                     <div className="text-5xl font-bold">{Math.round(cityWeather.temperature)}°C</div>
                     <div className="flex items-center justify-end mt-1">
                       <p className="text-xl mr-2">{cityWeather.conditions}</p>
-                      <img 
-                        src={`https://openweathermap.org/img/wn/${cityWeather.icon}@2x.png`} 
+                      <Image 
+                        src={`https://openweathermap.org/img/wn/${cityWeather.icon}@2x.png`}
                         alt={cityWeather.conditions}
-                        className="w-14 h-14"
+                        width={56}
+                        height={56}
                       />
                     </div>
                   </div>

@@ -1,13 +1,28 @@
 import axios from 'axios';
 import { NewsItem } from '../types/news';
 
+// Interface for NewsData.io API response
+interface NewsDataItem {
+  article_id: string;
+  title: string;
+  description: string;
+  link: string;
+  source_id: string;
+  pubDate: string;
+  image_url?: string;
+}
+
+interface NewsDataResponse {
+  results: NewsDataItem[];
+}
+
 // Replace with your actual NewsData.io API key
 const API_KEY = process.env.NEXT_PUBLIC_NEWSDATA_API_KEY || '';
 const NEWS_API_URL = 'https://newsdata.io/api/1/news';
 
 export const fetchCryptoNews = async (): Promise<NewsItem[]> => {
   try {
-    const response = await axios.get(NEWS_API_URL, {
+    const response = await axios.get<NewsDataResponse>(NEWS_API_URL, {
       params: {
         apikey: API_KEY,
         q: 'cryptocurrency OR bitcoin OR ethereum OR blockchain',
@@ -17,7 +32,7 @@ export const fetchCryptoNews = async (): Promise<NewsItem[]> => {
       },
     });
 
-    return response.data.results.map((item: any) => ({
+    return response.data.results.map((item: NewsDataItem) => ({
       id: item.article_id,
       title: item.title,
       description: item.description,

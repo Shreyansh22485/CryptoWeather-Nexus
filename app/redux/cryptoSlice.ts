@@ -22,7 +22,10 @@ export const fetchCryptosData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       return await fetchAllCryptosData();
-    } catch (_error) {
+    } catch (err) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.message);
+      }
       return rejectWithValue('Failed to fetch cryptocurrency data');
     }
   }
@@ -33,7 +36,10 @@ export const fetchCryptoHistoryData = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       return await fetchCryptoHistory(id);
-    } catch (_error) {
+    } catch (err) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.message);
+      }
       return rejectWithValue(`Failed to fetch history for ${id}`);
     }
   }
