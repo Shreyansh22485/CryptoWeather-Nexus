@@ -28,7 +28,7 @@ export const fetchWeatherData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       return await fetchAllCitiesWeather();
-    } catch (error) {
+    } catch (_error) {
       return rejectWithValue('Failed to fetch weather data');
     }
   }
@@ -39,7 +39,7 @@ export const fetchCityWeatherHistory = createAsyncThunk(
   async (city: string, { rejectWithValue }) => {
     try {
       return await fetchWeatherHistory(city);
-    } catch (error) {
+    } catch (_error) {
       return rejectWithValue(`Failed to fetch weather history for ${city}`);
     }
   }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks';
 import { fetchCryptosData, fetchCryptoHistoryData, toggleCryptoFavorite } from '../../redux/cryptoSlice';
@@ -31,7 +31,6 @@ ChartJS.register(
 
 export default function CryptoDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const cryptoId = params.id as string;
   

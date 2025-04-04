@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks';
 import { fetchWeatherData, fetchCityWeatherHistory } from '../../redux/weatherSlice';
@@ -31,7 +31,6 @@ ChartJS.register(
 
 export default function CityDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const cityId = params.id as string;
   const cityName = cityId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());

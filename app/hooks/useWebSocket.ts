@@ -4,7 +4,6 @@ import { addAlert } from '../redux/notificationsSlice';
 import { updateCryptoPrice } from '../redux/cryptoSlice';
 import webSocketService from '../services/webSocketService';
 import { CryptoPriceAlert } from '../types/crypto';
-import { WeatherAlert } from '../types/weather';
 
 export const useWebSocket = () => {
   const dispatch = useAppDispatch();
